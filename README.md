@@ -23,7 +23,7 @@ A simple web application built with React.js to send SMS messages using a simula
 - React.js
 - Axios for HTTP requests
 - React Bootstrap for UI components
-- ~~React Toastify for toast notification ~~ [removed]
+- ~~React Toastify for toast notification~~  (removed)
 
 ## Installation
 
