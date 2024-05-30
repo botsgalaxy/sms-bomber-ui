@@ -9,8 +9,6 @@ import {
   Form,
   ProgressBar,
 } from "react-bootstrap";
-import { ToastContainer, toast, Slide } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -52,11 +50,9 @@ const SmsForm = () => {
         if (isSuccess) {
           setResults((prevResults) => [...prevResults, `Success ${i + 1}`]);
           setSuccessCount((prevCount) => prevCount + 1);
-          toast.success(`SMS ${i + 1} sent successfully!`);
         } else {
           setResults((prevResults) => [...prevResults, `Failed ${i + 1}`]);
           setFailureCount((prevCount) => prevCount + 1);
-          toast.error(`SMS ${i + 1} failed to send.`);
         }
 
         // Actual API request code (commented out)
@@ -78,7 +74,6 @@ const SmsForm = () => {
       } catch (error) {
         setResults((prevResults) => [...prevResults, `Failed ${i + 1}`]);
         setFailureCount((prevCount) => prevCount + 1);
-        toast.error(`SMS ${i + 1} failed to send.`);
       }
     }
 
@@ -95,146 +90,130 @@ const SmsForm = () => {
   };
 
   return (
-    <div>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={500}
-        hideProgressBar
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        limit={0}
-        transition={Slide}
-      />
+    <Container className="mt-5">
+      <Row className="justify-content-md-center">
+        <Col md="6">
+          <h2 className="text-center mb-4">
+            <i className="fas fa-sms"></i> Send SMS
+          </h2>
+          {!submitting && results.length === 0 && (
+            <Card className="p-4">
+              <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="formPhoneNumber" className="mb-3">
+                  <Form.Label>
+                    <i className="fas fa-phone-alt"></i> Phone Number
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter phone number starting with +880"
+                    value={phoneNumber}
+                    onChange={handlePhoneNumberChange}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group controlId="formOperator" className="mb-3">
+                  <Form.Label>
+                    <i className="fas fa-network-wired"></i> Operator
+                  </Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={operator}
+                    onChange={(e) => setOperator(e.target.value)}
+                    required
+                  >
+                    <option value="GrameenPhone">GrameenPhone</option>
+                    <option value="Robi">Robi</option>
+                    <option value="Banglalink" disabled>
+                      Banglalink
+                    </option>
+                    <option value="Airtel" disabled>
+                      Airtel
+                    </option>
+                    <option value="Teletalk" disabled>
+                      Teletalk
+                    </option>
+                  </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="formSmsCount" className="mb-3">
+                  <Form.Label>
+                    <i className="fas fa-envelope"></i> SMS Count
+                  </Form.Label>
+                  <Form.Control
+                    type="number"
+                    value={smsCount}
+                    onChange={(e) => setSmsCount(e.target.value)}
+                    min="1"
+                    max="200"
+                    required
+                  />
+                </Form.Group>
+                <div className="text-center">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    className="btn-block"
+                    style={{ margin: "10px 0" }}
+                  >
+                    <i className="fas fa-paper-plane"></i> Send SMS
+                  </Button>
+                </div>
+              </Form>
+            </Card>
+          )}
 
-      <Container className="mt-5">
-        <Row className="justify-content-md-center">
-          <Col md="6">
-            <h2 className="text-center mb-4">
-              <i className="fas fa-sms"></i> Send SMS
-            </h2>
-            {!submitting && results.length === 0 && (
-              <Card className="p-4">
-                <Form onSubmit={handleSubmit}>
-                  <Form.Group controlId="formPhoneNumber" className="mb-3">
-                    <Form.Label>
-                      <i className="fas fa-phone-alt"></i> Phone Number
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter phone number starting with +880"
-                      value={phoneNumber}
-                      onChange={handlePhoneNumberChange}
-                      required
-                    />
-                  </Form.Group>
-                  <Form.Group controlId="formOperator" className="mb-3">
-                    <Form.Label>
-                      <i className="fas fa-network-wired"></i> Operator
-                    </Form.Label>
-                    <Form.Control
-                      as="select"
-                      value={operator}
-                      onChange={(e) => setOperator(e.target.value)}
-                      required
-                    >
-                      <option value="GrameenPhone">GrameenPhone</option>
-                      <option value="Robi">Robi</option>
-                      <option value="Banglalink" disabled>
-                        Banglalink
-                      </option>
-                      <option value="Airtel" disabled>
-                        Airtel
-                      </option>
-                      <option value="Teletalk" disabled>
-                        Teletalk
-                      </option>
-                    </Form.Control>
-                  </Form.Group>
-                  <Form.Group controlId="formSmsCount" className="mb-3">
-                    <Form.Label>
-                      <i className="fas fa-envelope"></i> SMS Count
-                    </Form.Label>
-                    <Form.Control
-                      type="number"
-                      value={smsCount}
-                      onChange={(e) => setSmsCount(e.target.value)}
-                      min="1"
-                      max="200"
-                      required
-                    />
-                  </Form.Group>
-                  <div className="text-center">
-                    <Button
-                      variant="primary"
-                      type="submit"
-                      className="btn-block"
-                      style={{ margin: "10px 0" }}
-                    >
-                      <i className="fas fa-paper-plane"></i> Send SMS
-                    </Button>
-                  </div>
-                </Form>
-              </Card>
-            )}
+          {submitting && (
+            <Card className="p-4 text-center">
+              <h4 className="mb-4">
+                <i className="fas fa-spinner fa-spin"></i> Sending SMS...
+              </h4>
+              <ProgressBar
+                now={(results.length / smsCount) * 100}
+                label={`${parseInt((results.length / smsCount) * 100)}%`}
+              />
+              <p className="mt-3">
+                <span className="text-success">
+                  <i className="fas fa-check-circle"></i> Success:{" "}
+                  {successCount}
+                </span>
+              </p>
+              <p>
+                <span className="text-danger">
+                  <i className="fas fa-times-circle"></i> Failure:{" "}
+                  {failureCount}
+                </span>
+              </p>
+            </Card>
+          )}
 
-            {submitting && (
-              <Card className="p-4 text-center">
-                <h4 className="mb-4">
-                  <i className="fas fa-spinner fa-spin"></i> Sending SMS...
-                </h4>
-                <ProgressBar
-                  now={(results.length / smsCount) * 100}
-                  label={`${parseInt((results.length / smsCount) * 100)}%`}
-                />
-                <p className="mt-3">
-                  <span className="text-success">
-                    <i className="fas fa-check-circle"></i> Success:{" "}
-                    {successCount}
-                  </span>
-                </p>
-                <p>
-                  <span className="text-danger">
-                    <i className="fas fa-times-circle"></i> Failure:{" "}
-                    {failureCount}
-                  </span>
-                </p>
-              </Card>
-            )}
-
-            {results.length > 0 && !submitting && (
-              <Card className="p-4 text-center">
-                <h4 className="mb-4">
-                  <i className="fas fa-check-circle"></i> SMS Sending Completed
-                </h4>
-                <p>
-                  <span className="text-success">
-                    <i className="fas fa-check-circle"></i> Success:{" "}
-                    {successCount}
-                  </span>
-                </p>
-                <p>
-                  <span className="text-danger">
-                    <i className="fas fa-times-circle"></i> Failure:{" "}
-                    {failureCount}
-                  </span>
-                </p>
-                <Button
-                  variant="secondary"
-                  className="btn-block mt-3"
-                  onClick={resetForm}
-                >
-                  <i className="fas fa-redo"></i> Try Again
-                </Button>
-              </Card>
-            )}
-          </Col>
-        </Row>
-      </Container>
-    </div>
+          {results.length > 0 && !submitting && (
+            <Card className="p-4 text-center">
+              <h4 className="mb-4">
+                <i className="fas fa-check-circle"></i> SMS Sending Completed
+              </h4>
+              <p>
+                <span className="text-success">
+                  <i className="fas fa-check-circle"></i> Success:{" "}
+                  {successCount}
+                </span>
+              </p>
+              <p>
+                <span className="text-danger">
+                  <i className="fas fa-times-circle"></i> Failure:{" "}
+                  {failureCount}
+                </span>
+              </p>
+              <Button
+                variant="secondary"
+                className="btn-block mt-3"
+                onClick={resetForm}
+              >
+                <i className="fas fa-redo"></i> Try Again
+              </Button>
+            </Card>
+          )}
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
