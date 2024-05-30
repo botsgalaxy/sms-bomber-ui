@@ -5,7 +5,7 @@ export const NavBarComponent = () => {
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
         <Navbar.Brand href="/">
-          <i className="fas fa-sms"></i> SMS Sender
+          <i className="fas fa-sms"></i> SMS Bomber
         </Navbar.Brand>
         <Nav className="ml-auto">
           <Nav.Link href="/">
