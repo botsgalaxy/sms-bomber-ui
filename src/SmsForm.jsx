@@ -6,8 +6,6 @@ import {
   Col,
   Button,
   Card,
-  Navbar,
-  Nav,
   Form,
   ProgressBar,
 } from "react-bootstrap";
@@ -15,7 +13,6 @@ import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "./index.css";
 
 const SmsForm = () => {
   const [phoneNumber, setPhoneNumber] = useState("+880");
@@ -112,18 +109,7 @@ const SmsForm = () => {
         limit={0}
         transition={Slide}
       />
-      <Navbar bg="dark" variant="dark" expand="lg">
-        <Container>
-          <Navbar.Brand href="/">
-            <i className="fas fa-sms"></i> SMS Sender
-          </Navbar.Brand>
-          <Nav className="ml-auto">
-            <Nav.Link href="/">
-              <i className="fas fa-home"></i> Home
-            </Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+
       <Container className="mt-5">
         <Row className="justify-content-md-center">
           <Col md="6">
@@ -248,17 +234,6 @@ const SmsForm = () => {
           </Col>
         </Row>
       </Container>
-
-      <footer className="bg-dark text-white text-center py-3 fixed-bottom">
-        <Container>
-          <p className="mb-0">
-            Crafted with ❤️ by &nbsp;
-            <a href="https://t.me/primeakash" className="primeakash">
-              𝐏𝐫𝐢𝐦𝐞 𝐀𝐤𝐚𝐬𝐡 🇧🇩
-            </a>
-          </p>
-        </Container>
-      </footer>
     </div>
   );
 };
