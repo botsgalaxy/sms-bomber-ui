@@ -1,4 +1,4 @@
-# SMS Sender UI
+# SMS Bomber UI
 
 A simple web application built with React.js to send SMS messages using a simulated API. Users can enter a phone number, select an operator, specify the number of SMS messages to send, and then initiate the sending process. The application provides real-time feedback on the success or failure of each SMS sent.
 
