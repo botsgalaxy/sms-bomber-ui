@@ -4,9 +4,11 @@ A simple web application built with React.js to send SMS messages using a simula
 
 ## Screenshots
 
-![Screenshot 1](/assets/screenshot1.jpg)
-![Screenshot 2](/assets/screenshot2.jpg)
-![Screenshot 3](/assets/screenshot3.jpg)
+<div align="center">
+  <img src="https://github.com/botsgalaxy/sms-bomber-ui/blob/main/assets/screenshot1.jpg" alt="Screenshot 1"  height="400"px>
+  <img src="https://github.com/botsgalaxy/sms-bomber-ui/blob/main/assets/screenshot2.jpg" alt="Screenshot 2"  height="400"px>
+  <img src="https://github.com/botsgalaxy/sms-bomber-ui/blob/main/assets/screenshot3.jpg" alt="Screenshot 3"  height="400"px>
+</div>
 
 ## Features
 
